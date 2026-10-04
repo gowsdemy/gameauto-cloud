@@ -1,8 +1,8 @@
 ﻿__pycache__/
 *.pyc
 .venv/
-config.env
 _session_cookies.json
+_cookie_text.txt
 _browser_profile/
 _edge_profile/
 _edge_profile2/
