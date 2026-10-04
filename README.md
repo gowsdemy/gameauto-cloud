@@ -97,7 +97,8 @@ GitHub 定时任务高峰期可能延迟几分钟到几十分钟，属正常，�
 
 | 文件 | 作用 |
 | --- | --- |
-| `获取cookie.bat` / `get_cookie.py` | **在你电脑上**取 cookie（本仓库唯一需要本地运行的，中文提示、直接输入账号密码） |
+| `获取cookie.bat` → `get_cookie.ps1` | **在你电脑上**取 cookie（本仓库唯一需要本地运行的；中文提示、直接输入账号密码） |
+| `get_cookie.py` | 上面那个工具的内部脚本（负责过验证+登录+导出文本），用户不用管 |
 | `gamemale_v2.py` | 取 cookie 用的引擎（过验证 + 登录） |
 | `gamemale_cloud.py` | 云端主脚本（cookie + curl_cffi 跑签到） |
 | `.github/workflows/signin.yml` | 云端工作流（每天定时 + 可手动触发） |
