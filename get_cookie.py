@@ -47,6 +47,12 @@ def main():
             os.remove(TEXT_FILE)
         except Exception:
             pass
+    # 关键：先删掉上一次的 cookie 文件，避免把旧的（可能已失效的）会话注入浏览器、干扰本次登录
+    if os.path.exists(COOKIE_FILE):
+        try:
+            os.remove(COOKIE_FILE)
+        except Exception:
+            pass
 
     import gamemale_v2 as engine   # 本地版引擎（负责过验证 + 登录）
 

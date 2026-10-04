@@ -67,7 +67,9 @@ if ($LASTEXITCODE -ne 0) {
 
 # ---------- 3) 输入账号 ----------
 Write-Host ""
-Write-Host "请输入你的 GameMale 论坛账号（只在本机使用，不会上传）" -ForegroundColor Cyan
+Write-Host "请输入你在 GameMale 论坛的账号（就是你在论坛里登录用的用户名，不是 GitHub 账号）" -ForegroundColor Cyan
+Write-Host "（该信息只在本机使用，不会上传）" -ForegroundColor DarkGray
+Write-Host ""
 
 $user = ""
 $tries = 0
