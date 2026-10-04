@@ -31,12 +31,8 @@
 > 需要：Windows + 已装 **Python 3.10+**（[下载](https://www.python.org/downloads/)，安装时勾选 *Add Python to PATH*）+ **Edge 或 Chrome**。
 
 1. 把这个仓库**下载到电脑**（页面右上角 **Code → Download ZIP**，解压到一个文件夹）。
-2. 复制 `config.env.example` 为 `config.env`，用记事本填：
-   ```
-   USERNAME=你的论坛用户名
-   PASSWORD=你的论坛登录密码
-   ```
-3. 双击 **`获取cookie.bat`**（首次会自动装依赖，较慢）：
+2. 双击 **`获取cookie.bat`**（首次会自动装依赖，较慢，请耐心）：
+   - 按窗口提示**输入你的论坛用户名和密码**（只在本机使用，不会上传）；
    - 会弹出**浏览器窗口**；若出现「请进行人机验证」，**用鼠标点一下验证框**；
    - 之后自动登录，窗口里会打印出一段**很长的文本**，并**自动复制到剪贴板**。
 
@@ -101,12 +97,11 @@ GitHub 定时任务高峰期可能延迟几分钟到几十分钟，属正常，�
 
 | 文件 | 作用 |
 | --- | --- |
-| `获取cookie.bat` / `get_cookie.py` | **在你电脑上**取 cookie（本仓库唯一需要本地运行的） |
+| `获取cookie.bat` / `get_cookie.py` | **在你电脑上**取 cookie（本仓库唯一需要本地运行的，中文提示、直接输入账号密码） |
 | `gamemale_v2.py` | 取 cookie 用的引擎（过验证 + 登录） |
 | `gamemale_cloud.py` | 云端主脚本（cookie + curl_cffi 跑签到） |
 | `.github/workflows/signin.yml` | 云端工作流（每天定时 + 可手动触发） |
-| `config.env.example` | 取 cookie 用的账号配置模板 |
-| `requirements.txt` | 依赖清单 |
+| `requirements.txt` | 依赖清单（`获取cookie.bat` 会自动安装，无需手动） |
 
 ---
 
