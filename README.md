@@ -55,13 +55,18 @@
 
 > 邮箱三项里只要有一项为空，云端就跳过发信，只做签到。
 
-### 第 4 步：打开 Actions 并手动测一次
-进入仓库 **Actions** 页 → 若有提示点 **I understand my workflows, go ahead and enable them** →
-左侧选 **GameMale Cloud Sign-in** → 右侧 **Run workflow** 手动跑一次。
-- 成功：几分钟后收到"任务运行报告"邮件；
-- 失败：收到「**【GameMale 签到失败】请刷新 cookie**」邮件 → 回到第 1 步重新取 cookie 并更新 Secret。
+### 第 4 步：启用 Actions 并手动测一次（之后就会自动运行）
+1. 进入仓库 **Actions** 页 → 若出现提示，点 **I understand my workflows, go ahead and enable them**。
+2. **放开写入权限**（否则没法把金币基准写回仓库，定时也可能被停）：
+   **Settings → Actions → General → Workflow permissions** → 选 **Read and write permissions** → 保存。
+3. 左侧选 **GameMale Cloud Sign-in** → 右侧 **Run workflow** → 手动跑一次。
+   - 成功：几分钟后收到"任务运行报告"邮件；
+   - 失败：收到「**【GameMale 签到失败】请刷新 cookie**」邮件 → 回到第 1 步重新取 cookie 并更新 Secret。
 
-之后**每天自动跑两次**，电脑无需开机。
+**跑通一次之后，它就会自动运行**：每天北京时间 **00:17** 与 **14:43** 各跑一次，电脑无需开机。
+（内置「Keepalive」保活工作流，避免 GitHub 因长期无活动而自动停掉定时任务。）
+
+> 若你**还没设** `SESSION_COOKIES` 就手动跑了，日志里会提示「未配置 SESSION_COOKIES，本次跳过」，按第 3 步补上即可。
 
 ---
 
