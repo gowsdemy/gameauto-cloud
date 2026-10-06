@@ -1,0 +1,26 @@
+name: 'Keepalive'
+
+# 目的：GitHub 会在仓库连续 60 天无活动时自动停掉定时任务。
+# 本工作流每月更新一次时间戳文件，保持仓库"活跃"，从而让每日签到一直自动运行。
+
+on:
+  schedule:
+    - cron: '0 3 1 * *'   # 每月 1 号 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Touch keepalive file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p .github
+          date -u +"%Y-%m-%d %H:%M:%S UTC" > .github/keepalive.txt
+          git add .github/keepalive.txt
+          git commit -m "chore: keepalive" || echo "无变化，跳过"
+          git push || true

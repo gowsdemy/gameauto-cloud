@@ -13,17 +13,31 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v6
 
+      # 未配置 SESSION_COOKIES 时优雅跳过（不刷失败记录）；配置后会正常执行
+      - name: Check config
+        id: cfg
+        run: |
+          if [ -z "${{ secrets.SESSION_COOKIES }}" ]; then
+            echo "::warning::未配置 SESSION_COOKIES，本次跳过。请按 README 设置 Secret 后再运行。"
+            echo "ready=0" >> $GITHUB_OUTPUT
+          else
+            echo "ready=1" >> $GITHUB_OUTPUT
+          fi
+
       - name: Setup Python
+        if: steps.cfg.outputs.ready == '1'
         uses: actions/setup-python@v6
         with:
           python-version: '3.10'
 
       - name: Install Dependencies
+        if: steps.cfg.outputs.ready == '1'
         run: |
           python -m pip install --upgrade pip
           pip install curl_cffi
 
       - name: Run Cloud Sign-in
+        if: steps.cfg.outputs.ready == '1'
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
