@@ -447,9 +447,11 @@ class Gamemale:
             self.login_logger.error(f"获取 formhash 失败: {e}")
             return False
         login_url = f"{self.base_url}/member.php?mod=logging&action=login&loginsubmit=yes&loginhash={loginhash}&inajax=1"
+        # Discuz 的 loginfield：用邮箱登录时必须是 "email"，否则按原来的用户名方式
+        loginfield = "email" if "@" in self.username else self.username
         form_data = {
             'formhash': formhash, 'referer': f"{self.base_url}/",
-            'loginfield': self.username, 'username': self.username,
+            'loginfield': loginfield, 'username': self.username,
             'password': self.password, 'questionid': self.questionid, 'answer': self.answer,
             'cookietime': 2592000, 'seccodehash': 'cSA',
             'seccodemodid': 'member::logging', 'seccodeverify': code,
